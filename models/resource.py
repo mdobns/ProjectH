@@ -36,7 +36,7 @@ class Resource(Base):
     
     # Extracted content
     extracted_content = Column(Text, nullable=True)  # Text content extracted
-    metadata = Column(Text, nullable=True)  # JSON string for additional info
+    resource_metadata = Column(Text, nullable=True)  # JSON string for additional info
     
     # Processing status
     status = Column(Enum(ResourceStatus), default=ResourceStatus.PENDING, nullable=False)

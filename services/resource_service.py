@@ -49,7 +49,7 @@ class ResourceService:
                 
                 # Update resource
                 resource.extracted_content = text
-                resource.metadata = json.dumps(metadata)
+                resource.resource_metadata = json.dumps(metadata)
                 resource.status = ResourceStatus.COMPLETED
                 resource.processed_at = datetime.utcnow()
                 resource.error_message = None
@@ -98,7 +98,7 @@ class ResourceService:
             if text:
                 # Update resource
                 resource.extracted_content = text
-                resource.metadata = json.dumps(metadata) if metadata else None
+                resource.resource_metadata = json.dumps(metadata) if metadata else None
                 resource.status = ResourceStatus.COMPLETED
                 resource.processed_at = datetime.utcnow()
                 resource.error_message = None
@@ -147,7 +147,7 @@ class ResourceService:
             if text:
                 # Update resource
                 resource.extracted_content = text
-                resource.metadata = json.dumps(metadata) if metadata else None
+                resource.resource_metadata = json.dumps(metadata) if metadata else None
                 resource.status = ResourceStatus.COMPLETED
                 resource.processed_at = datetime.utcnow()
                 resource.error_message = None
