@@ -30,3 +30,16 @@ email-validator==2.2.0
 
 # Utilities
 aiosqlite==0.20.0  # Async SQLite support
+
+# PDF Processing
+PyPDF2==3.0.1
+pdfplumber==0.10.3
+
+# Web Scraping
+beautifulsoup4==4.12.2
+requests==2.31.0
+lxml==5.1.0
+
+# File upload handling
+aiofiles==23.2.1
+

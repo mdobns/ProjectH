@@ -26,6 +26,15 @@ async def register_admin(
     
     Returns JWT access and refresh tokens.
     """
+    # Verify company exists
+    from models import Company, AdminRole
+    company = db.query(Company).filter(Company.id == admin_data.company_id).first()
+    if not company:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Company not found"
+        )
+    
     # Check if username already exists
     existing_admin = db.query(AdminUser).filter(
         AdminUser.username == admin_data.username
@@ -46,13 +55,21 @@ async def register_admin(
             detail="Email already registered"
         )
     
+    # Validate role
+    try:
+        role = AdminRole[admin_data.role.upper()]
+    except (KeyError, AttributeError):
+        role = AdminRole.AGENT
+    
     # Create new admin
     hashed_password = get_password_hash(admin_data.password)
     new_admin = AdminUser(
+        company_id=admin_data.company_id,
         username=admin_data.username,
         email=admin_data.email,
         hashed_password=hashed_password,
         full_name=admin_data.full_name,
+        role=role,
         is_active=1
     )
     db.add(new_admin)
@@ -61,10 +78,18 @@ async def register_admin(
     
     # Generate tokens
     access_token = create_access_token(
-        data={"sub": new_admin.username, "admin_id": new_admin.id}
+        data={
+            "sub": new_admin.username,
+            "admin_id": new_admin.id,
+            "company_id": new_admin.company_id
+        }
     )
     refresh_token = create_refresh_token(
-        data={"sub": new_admin.username, "admin_id": new_admin.id}
+        data={
+            "sub": new_admin.username,
+            "admin_id": new_admin.id,
+            "company_id": new_admin.company_id
+        }
     )
     
     return Token(
@@ -103,10 +128,18 @@ async def login_admin(
     
     # Generate tokens
     access_token = create_access_token(
-        data={"sub": admin.username, "admin_id": admin.id}
+        data={
+            "sub": admin.username,
+            "admin_id": admin.id,
+            "company_id": admin.company_id
+        }
     )
     refresh_token = create_refresh_token(
-        data={"sub": admin.username, "admin_id": admin.id}
+        data={
+            "sub": admin.username,
+            "admin_id": admin.id,
+            "company_id": admin.company_id
+        }
     )
     
     return Token(

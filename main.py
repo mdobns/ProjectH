@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 from config import settings
 from models.database import init_db
-from routes import auth_router, chat_router, admin_router
+from routes import auth_router, chat_router, admin_router, company_router, resource_router
 from websocket import client_router, admin_router as ws_admin_router
 import logging
 import os
@@ -51,6 +51,8 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(chat_router)
 app.include_router(admin_router)
+app.include_router(company_router)
+app.include_router(resource_router)
 
 # Include WebSocket routers
 app.include_router(client_router)

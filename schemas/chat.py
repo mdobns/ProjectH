@@ -6,6 +6,7 @@ from models.chat import SessionState, SenderType
 
 class ClientInfoCreate(BaseModel):
     """Schema for creating client information."""
+    company_id: int = Field(..., gt=0)
     name: str = Field(..., min_length=1, max_length=255)
     email: EmailStr
     phone: str = Field(..., min_length=10, max_length=50)
@@ -89,10 +90,12 @@ class AdminLogin(BaseModel):
 
 class AdminRegister(BaseModel):
     """Schema for admin registration."""
+    company_id: int = Field(..., gt=0)
     username: str = Field(..., min_length=3, max_length=100)
     email: EmailStr
     password: str = Field(..., min_length=8)
     full_name: Optional[str] = None
+    role: Optional[str] = "AGENT"  # AGENT or COMPANY_ADMIN
 
 
 class Token(BaseModel):
