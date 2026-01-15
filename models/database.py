@@ -1,0 +1,40 @@
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from config import settings
+
+# SQLite Configuration (Default)
+engine = create_engine(
+    settings.database_url,
+    connect_args={"check_same_thread": False} if "sqlite" in settings.database_url else {},
+    echo=settings.debug,
+)
+
+# PostgreSQL Configuration (Uncomment to use)
+# from sqlalchemy.pool import QueuePool
+# engine = create_engine(
+#     settings.database_url,
+#     poolclass=QueuePool,
+#     pool_size=5,
+#     max_overflow=10,
+#     pool_pre_ping=True,
+#     echo=settings.debug,
+# )
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()
+
+
+def get_db():
+    """Dependency for getting database session."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def init_db():
+    """Initialize database tables."""
+    Base.metadata.create_all(bind=engine)

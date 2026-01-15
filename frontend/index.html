@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Demo - Client Interface</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="demo-container">
+        <header class="demo-header">
+            <h1>🤖 AI Chatbot Demo</h1>
+            <p>Experience our AI-powered customer service solution</p>
+        </header>
+
+        <div class="demo-content">
+            <div class="info-section">
+                <h2>Welcome!</h2>
+                <p>This chatbot combines AI efficiency with human empathy:</p>
+                <ul>
+                    <li>✨ <strong>Instant AI responses</strong> for common questions</li>
+                    <li>👤 <strong>Seamless handoff</strong> to human agents when needed</li>
+                    <li>💬 <strong>Real-time communication</strong> via WebSocket</li>
+                    <li>📊 <strong>Full conversation history</strong></li>
+                </ul>
+                <p class="cta">Click the chat button in the bottom-right to start!</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Fast Setup</h3>
+                    <p>Add to your website with just a few lines of code</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Customizable</h3>
+                    <p>Match your brand colors and style</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive</h3>
+                    <p>Works perfectly on mobile and desktop</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure</h3>
+                    <p>JWT authentication and data encryption</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget (This is what clients will embed) -->
+    <div id="chatbot-widget"></div>
+
+    <script src="chatbot-widget.js"></script>
+    <script>
+        // Initialize the chatbot widget
+        ChatbotWidget.init({
+            apiUrl: 'http://localhost:8000',
+            position: 'bottom-right',
+            primaryColor: '#6366f1',
+            greeting: 'Hi! How can I help you today?',
+            companyName: 'Demo Company'
+        });
+    </script>
+</body>
+</html>
