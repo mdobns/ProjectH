@@ -3,7 +3,7 @@ Resource Management Routes
 Handles resource uploads, processing, and management.
 """
 
-from fastapi import APIRouter, Depend, HTTPException, status, UploadFile, File, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, BackgroundTasks
 from sqlalchemy.orm import Session
 from datetime import datetime
 import os
@@ -54,7 +54,7 @@ async def upload_pdf(
     company_id: int,
     file: UploadFile = File(...),
     background_tasks: BackgroundTasks = BackgroundTasks(),
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """
     Upload a PDF file for knowledge base.
@@ -117,7 +117,7 @@ async def add_website(
     company_id: int,
     resource_data: ResourceCreate,
     background_tasks: BackgroundTasks = BackgroundTasks(),
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """
     Add a website URL for knowledge base.
@@ -166,7 +166,7 @@ async def add_facebook_page(
     company_id: int,
     resource_data: ResourceCreate,
     background_tasks: BackgroundTasks = BackgroundTasks(),
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """
     Add a Facebook page URL for knowledge base.
@@ -214,7 +214,7 @@ async def add_facebook_page(
 async def add_text(
     company_id: int,
     resource_data: ResourceCreate,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Add custom text content for knowledge base."""
     # Verify company exists
@@ -259,7 +259,7 @@ async def list_resources(
     page: int = 1,
     page_size: int = 20,
     status_filter: str = None,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """List all resources for a company with pagination."""
     # Verify company exists
@@ -298,7 +298,7 @@ async def list_resources(
 @router.get("/{resource_id}", response_model=ResourceResponse)
 async def get_resource(
     resource_id: int,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Get resource details."""
     resource = db.query(Resource).filter(Resource.id == resource_id).first()
@@ -315,7 +315,7 @@ async def get_resource(
 @router.get("/{resource_id}/content", response_model=ResourceContentResponse)
 async def get_resource_content(
     resource_id: int,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Get resource content preview."""
     resource = db.query(Resource).filter(Resource.id == resource_id).first()
@@ -344,7 +344,7 @@ async def get_resource_content(
 async def update_resource(
     resource_id: int,
     resource_data: ResourceUpdate,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Update resource (e.g., activate/deactivate)."""
     resource = db.query(Resource).filter(Resource.id == resource_id).first()
@@ -369,7 +369,7 @@ async def update_resource(
 async def reprocess_resource(
     resource_id: int,
     background_tasks: BackgroundTasks = BackgroundTasks(),
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Reprocess a failed or completed resource."""
     resource = db.query(Resource).filter(Resource.id == resource_id).first()
@@ -400,7 +400,7 @@ async def reprocess_resource(
 @router.delete("/{resource_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_resource(
     resource_id: int,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Delete a resource and its associated file."""
     resource = db.query(Resource).filter(Resource.id == resource_id).first()
@@ -424,3 +424,4 @@ async def delete_resource(
     db.commit()
     
     return None
+

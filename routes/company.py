@@ -3,7 +3,7 @@ Company Management Routes
 Handles company registration, authentication, and profile management.
 """
 
-from fastapi import APIRouter, Depend, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from datetime import datetime
 import re
@@ -32,7 +32,7 @@ def create_slug(name: str) -> str:
 @router.post("/register", response_model=CompanyResponse, status_code=status.HTTP_201_CREATED)
 async def register_company(
     company_data: CompanyCreate,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """
     Register a new company.
@@ -76,7 +76,7 @@ async def register_company(
 @router.get("/slug/{slug}", response_model=CompanyResponse)
 async def get_company_by_slug(
     slug: str,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Get company details by slug (public endpoint)."""
     company = db.query(Company).filter(
@@ -96,7 +96,7 @@ async def get_company_by_slug(
 @router.get("/{company_id}", response_model=CompanyResponse)
 async def get_company(
     company_id: int,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Get company details by ID."""
     company = db.query(Company).filter(Company.id == company_id).first()
@@ -114,7 +114,7 @@ async def get_company(
 async def update_company(
     company_id: int,
     company_data: CompanyUpdate,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Update company information."""
     company = db.query(Company).filter(Company.id == company_id).first()
@@ -153,7 +153,7 @@ async def update_company(
 @router.get("/{company_id}/stats", response_model=CompanyStats)
 async def get_company_stats(
     company_id: int,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Get company statistics."""
     company = db.query(Company).filter(Company.id == company_id).first()
@@ -203,7 +203,7 @@ async def get_company_stats(
 @router.delete("/{company_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def deactivate_company(
     company_id: int,
-    db: Session = Depend(get_db)
+    db: Session = Depends(get_db)
 ):
     """Deactivate a company (soft delete)."""
     company = db.query(Company).filter(Company.id == company_id).first()
@@ -219,3 +219,4 @@ async def deactivate_company(
     db.commit()
     
     return None
+
