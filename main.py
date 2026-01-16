@@ -128,6 +128,33 @@ async def health_check():
     return {"status": "healthy"}
 
 
+@app.get("/register")
+async def company_register_page():
+    """Serve company registration page."""
+    register_path = os.path.join(os.path.dirname(__file__), "frontend", "company-register.html")
+    if os.path.exists(register_path):
+        return FileResponse(register_path)
+    return {"error": "Registration page not found"}
+
+
+@app.get("/company-register.css")
+async def company_register_css():
+    """Serve company registration styles."""
+    css_path = os.path.join(os.path.dirname(__file__), "frontend", "company-register.css")
+    if os.path.exists(css_path):
+        return FileResponse(css_path, media_type="text/css")
+    return {"error": "CSS not found"}
+
+
+@app.get("/company-register.js")
+async def company_register_js():
+    """Serve company registration JavaScript."""
+    js_path = os.path.join(os.path.dirname(__file__), "frontend", "company-register.js")
+    if os.path.exists(js_path):
+        return FileResponse(js_path, media_type="application/javascript")
+    return {"error": "JS not found"}
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(

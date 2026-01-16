@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Your Company - Chatbot SaaS Platform</title>
+    <meta name="description" content="Register your company and start using our AI-powered chatbot platform with custom knowledge base support.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/company-register.css">
+</head>
+<body>
+    <!-- Background gradient and animated shapes -->
+    <div class="background-container">
+        <div class="gradient-blob blob-1"></div>
+        <div class="gradient-blob blob-2"></div>
+        <div class="gradient-blob blob-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="40" rx="8" fill="url(#gradient)"/>
+                    <path d="M20 10L28 16V24L20 30L12 24V16L20 10Z" fill="white" opacity="0.9"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0" y1="0" x2="40" y2="40">
+                            <stop offset="0%" style="stop-color:#667eea"/>
+                            <stop offset="100%" style="stop-color:#764ba2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>ChatBot SaaS</span>
+            </div>
+            <a href="/" class="back-link">← Back to Home</a>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- Left Side - Info -->
+                <div class="info-section">
+                    <h1 class="title">Start Your Journey</h1>
+                    <p class="subtitle">Join thousands of companies using our AI-powered chatbot platform</p>
+                    
+                    <div class="features">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7L12 12L22 7L12 2Z"/>
+                                    <path d="M2 17L12 22L22 17"/>
+                                    <path d="M2 12L12 17L22 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Custom Knowledge Base</h3>
+                                <p>Upload PDFs, websites, and Facebook pages for personalized AI responses</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13"/>
+                                    <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Team Collaboration</h3>
+                                <p>Manage multiple agents and seamlessly hand off to human support</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3>Real-time Analytics</h3>
+                                <p>Track conversations, agent performance, and customer satisfaction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Form -->
+                <div class="form-section">
+                    <div class="form-card">
+                        <h2 class="form-title">Create Your Account</h2>
+                        <p class="form-subtitle">Get started in minutes. No credit card required.</p>
+
+                        <form id="registerForm" class="register-form">
+                            <div class="form-group">
+                                <label for="companyName" class="form-label">
+                                    Company Name
+                                    <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="companyName" 
+                                    name="name" 
+                                    class="form-input"
+                                    placeholder="Acme Corporation"
+                                    required
+                                    minlength="2"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="companySlug" class="form-label">
+                                    Company Slug
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="input-with-prefix">
+                                    <span class="input-prefix">yourcompany.chatbot.com/</span>
+                                    <input 
+                                        type="text" 
+                                        id="companySlug" 
+                                        name="slug" 
+                                        class="form-input"
+                                        placeholder="acme-corp"
+                                        required
+                                        pattern="^[a-z0-9-]+$"
+                                        minlength="2"
+                                    >
+                                </div>
+                                <small class="form-hint">Lowercase letters, numbers, and hyphens only</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">
+                                    Email Address
+                                    <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="form-input"
+                                    placeholder="contact@acmecorp.com"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone" class="form-label">
+                                    Phone Number
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    name="phone" 
+                                    class="form-input"
+                                    placeholder="+1 (555) 123-4567"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="website" class="form-label">
+                                    Website
+                                </label>
+                                <input 
+                                    type="url" 
+                                    id="website" 
+                                    name="website" 
+                                    class="form-input"
+                                    placeholder="https://acmecorp.com"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description" class="form-label">
+                                    Company Description
+                                </label>
+                                <textarea 
+                                    id="description" 
+                                    name="description" 
+                                    class="form-textarea"
+                                    placeholder="Tell us about your company..."
+                                    rows="3"
+                                ></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="form-label">
+                                    Password
+                                    <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    class="form-input"
+                                    placeholder="••••••••"
+                                    required
+                                    minlength="8"
+                                >
+                                <small class="form-hint">Minimum 8 characters</small>
+                            </div>
+
+                            <div class="form-group checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" required>
+                                    <span class="checkbox-text">
+                                        I agree to the <a href="/terms" target="_blank">Terms of Service</a> and 
+                                        <a href="/privacy" target="_blank">Privacy Policy</a>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="submit-button" id="submitBtn">
+                                <span class="button-text">Create Account</span>
+                                <span class="button-loader" style="display: none;">
+                                    <svg class="spinner" width="20" height="20" viewBox="0 0 50 50">
+                                        <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="4" stroke-dasharray="80" stroke-dashoffset="60"></circle>
+                                    </svg>
+                                </span>
+                            </button>
+
+                            <div class="form-footer">
+                                Already have an account? <a href="/admin" class="login-link">Sign in</a>
+                            </div>
+                        </form>
+
+                        <!-- Alert messages -->
+                        <div id="alertContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/company-register.js"></script>
+</body>
+</html>
